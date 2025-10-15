@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <iostream>
+#include <fstream>
 #include <ctime>
 using namespace std;
 
@@ -7,14 +9,48 @@ using namespace std;
 
 class Tasks {
 public:
-    string title;
-    int priority;
+    Tasks(int taskId, string titleTask, string desc, bool comp)
+    {
+        id = taskId;
+        title = titleTask;
+        description = desc;
+        completed = comp;
 
+    }; // initialising list
+
+    void displayTask()
+    {
+        string myTasks;
+        ifstream taskFile("TasksList.txt");
+        while (getline(taskFile, myTasks)) 
+        {
+            cout << myTasks;
+        }
+    }
+ 
+    void addTask()
+    {
+        ofstream taskFile("TasksList.txt");
+        taskFile << "Test 123";
+        taskFile.close();
+    }
+private:
+    int id;
+    string title;
+    string description;
+    bool completed;
 };
 
 
 int main()
 {
-    cout << "To Do List" << endl;
+    cout << "//////////////////////////" << endl;
+    cout << "TO DO LIST" << endl;
+    Tasks task(1, "first", "working class", false);
+    task.addTask();
+    task.displayTask();
+    
+
+
 }
 
